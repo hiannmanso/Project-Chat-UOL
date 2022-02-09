@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bate papo UOL</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="resetcss.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header class="header">
+        <img src="images/logo 1.png" alt=''logoUOL>
+        <img  onclick='showSideBar()' src="images/Vector (6).png" alt="">
+    </header>
+
+    <main class="main">
+        <div class="container-mesage">
+            <div class="mesage">
+                <h1>teste</h1>
+            </div>
+
+        </div>
+    </main>
+    <div class="complement-sidebar hidden" onclick="closeSideBar()">
+
+    </div>
+    <div class="sidebar hidden">
+        <section class="header-sidebar">
+            <p>Escolha um contato para enviar mensagem:</p>
+        </section>
+
+        <section class="users-sidebar">
+            <div class="user-sidebar">
+                <ion-icon class="icon all" name="people-sharp"></ion-icon>
+                <div class="name-user-sidebar">
+                    <p >Todos</p>
+                    <ion-icon class="checkbox hidden " name="checkmark-outline"></ion-icon>
+                </div>
+            </div>
+        </section>
+
+        <section class="type-msg-sidebar">
+            <p class="visibilit">Escolha a visibilidade:</p>
+            <div class="choices-visibilit-msg-sidebar">
+                <div class ='choice-visibilit' onclick="choiceVisibilit(this)">
+                    <!-- setAttribute('name',"lock-closed-outline" PARA O CADEADO FECHADO
+                                            'lock-open-outline' PARA CADEADO ABERTO
+                        ) -->
+                    <ion-icon class="icon padlock" name="lock-closed-outline"></ion-icon>
+                    <div class="name-user-sidebar">
+                        <p >Todos</p>
+                        <ion-icon class="checkbox hidden" name="checkmark-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="send-mesage-footer"> 
+            <input type="text" placeholder="Escreva aqui...">
+        </div>
+       
+        <img src="images/Vector (8).png" alt="send-text">
+    </footer>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script  type = "module"  src = "https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" > </script> 
+    <script  nomodule  src = "https://unpkg .com/ionicons@5.5.2/dist/ionicons/ionicons.js" > </script>
+</body>
+</html>
