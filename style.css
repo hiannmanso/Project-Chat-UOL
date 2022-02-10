@@ -21,12 +21,19 @@
 
 
 .main{
-    background-color: aqua;
+
     height: 1000px;
     width: 100vw;
     margin:80px 0;
 }
+.container-mesage{
+    background-color: #E5E5E5;;
+    overflow-y: scroll;
+    height: calc(100vh -160px)
+    
+}
 .mesage{
+    
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -34,7 +41,7 @@
     line-height: 16px;
     display: flex;
     align-items: center;
-    margin: 0 9px 0 8px;
+    margin: 4px 9px 0 8px;
     height: 40px;
     background: #DCDCDC;
     border-radius: 2px;
@@ -75,12 +82,13 @@
 
 .sidebar{
     /* display: none; */
-    position: absolute;
+    position: fixed;
     z-index: 5;
     top: 0;
     right: 0;
     width: 70%;
-    height: 100%;
+    bottom: 0;
+
     background: #FFFFFF;
     
 }
@@ -101,6 +109,10 @@
     height: 84px;
 
     color: #000000;
+}
+.users-sidebar{
+    overflow-y:scroll;
+    height: 70%;
 }
 .user-sidebar{
     font-family: Roboto;
@@ -139,11 +151,11 @@
 }
 
 .complement-sidebar{
-    position: absolute;
+    position: fixed;
     z-index: 5;
     top: 0;
     left: 0;
-    height: 100%;
+    bottom: 0;
     width: 30%;
     background: rgba(0, 0, 0, 0.6);
 }

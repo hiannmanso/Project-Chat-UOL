@@ -20,10 +20,6 @@
 
     <main class="main">
         <div class="container-mesage">
-            <div class="mesage">
-                <h1>teste</h1>
-            </div>
-
         </div>
     </main>
     <div class="complement-sidebar hidden" onclick="closeSideBar()">
@@ -47,20 +43,14 @@
         <section class="type-msg-sidebar">
             <p class="visibilit">Escolha a visibilidade:</p>
             <div class="choices-visibilit-msg-sidebar">
-                <div class ='choice-visibilit' onclick="choiceVisibilit(this)">
-                    <!-- setAttribute('name',"lock-closed-outline" PARA O CADEADO FECHADO
-                                            'lock-open-outline' PARA CADEADO ABERTO
-                        ) -->
+                <div class ='choice-visibilit' name="message" onclick="choiceVisibilit(this)">
                     <ion-icon class="icon padlock" name="lock-closed-outline"></ion-icon>
                     <div class="name-user-sidebar">
                         <p >Todos</p>
                         <ion-icon class="checkbox hidden bottom" name="checkmark-outline"></ion-icon>
                     </div>
                 </div>
-                <div class ='choice-visibilit' onclick="choiceVisibilit(this)">
-                    <!-- setAttribute('name',"lock-closed-outline" PARA O CADEADO FECHADO
-                                            'lock-open-outline' PARA CADEADO ABERTO
-                        ) -->
+                <div class ='choice-visibilit' name="private_message" onclick="choiceVisibilit(this)">
                     <ion-icon class="icon padlock" name="lock-closed-outline"></ion-icon>
                     <div class="name-user-sidebar">
                         <p >Mensagem Privada</p>
@@ -73,10 +63,10 @@
 
     <footer class="footer">
         <div class="send-mesage-footer"> 
-            <input type="text" placeholder="Escreva aqui...">
+            <input class="msg" type="text" placeholder="Escreva aqui...">
         </div>
        
-        <img src="images/Vector (8).png" alt="send-text">
+        <img src="images/Vector (8).png" alt="send-text" onclick="sendMessage()">
     </footer>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
