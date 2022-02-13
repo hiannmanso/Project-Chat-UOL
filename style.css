@@ -27,9 +27,10 @@
     margin:80px 0;
 }
 .container-mesage{
-    background-color: #E5E5E5;;
     overflow-y: scroll;
-    height: calc(100vh -160px)
+    background-color: #E5E5E5;
+    height: calc(100vh -160px);
+    padding-bottom: 84px;
     
 }
 .mesage{
@@ -42,11 +43,9 @@
     display: flex;
     align-items: center;
     margin: 4px 9px 0 8px;
-    height: 40px;
-    background: #DCDCDC;
+    padding: 10px 0 13px;
     border-radius: 2px;
-
-    color: #AAAAAA;
+    overflow-x: hidden;
 }
 
 .footer{
@@ -86,7 +85,7 @@
     z-index: 5;
     top: 0;
     right: 0;
-    width: 70%;
+    left: 30%;
     bottom: 0;
 
     background: #FFFFFF;
@@ -111,6 +110,7 @@
     color: #000000;
 }
 .users-sidebar{
+    overflow-x: hidden;
     overflow-y:scroll;
     height: 70%;
 }
@@ -184,4 +184,96 @@
 
 .hidden{
     display: none;
+}
+
+
+.status{
+    background: #DCDCDC;
+    border-radius: 2px;
+
+}
+.msg{
+    background: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+}
+.privatemsg{
+    min-height: 40px;
+    background: #FFDEDE;
+    border-radius: 2px;
+
+}
+.timer{
+    color: #AAAAAA;
+}
+
+b{
+    font-weight: bold;
+}
+.send-mesage-footer{
+    display: flex;
+    flex-direction: column;
+}
+.send-mesage-footer input{
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    border: none;
+
+    display: flex;
+    align-items: center;
+}
+.send-mesage-footer h1{
+    font-family: Roboto;
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 25px;
+    margin: 4px 0 0 17px;
+}
+
+.loginScreen{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background: #FFFFFF;
+}
+.imgLogin{
+    width: 130px;
+    height: 92px;
+    margin: 72px auto 94px;
+
+}
+
+.inputUser{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    /* or 139% */
+    width: 260px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #AEAEAE;
+}
+.buttonEnter{
+    width: 109px;
+    height: 45px;
+    background: #E7E7E7;
+    border-radius: 9px;
+    border: none;
 }

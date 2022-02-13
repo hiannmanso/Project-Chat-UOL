@@ -11,8 +11,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </head>
 <body>
+    <div class ='loginScreen'>
+        <img class ='imgLogin'src="images/logo 1.png" alt='logoUOL'>
+        <input class="inputUser" type="text" placeholder="Digite seu nome">
+        <button class="buttonEnter" onclick="loginUser()">Entrar</button>
+
+    </div>
     <header class="header">
         <img src="images/logo 1.png" alt=''logoUOL>
         <img  onclick='showSideBar()' src="images/Vector (6).png" alt="">
@@ -31,7 +40,7 @@
         </section>
 
         <section class="users-sidebar">
-            <div class="user-sidebar">
+            <div class="user-sidebar" onclick='choicePerson(this)'>
                 <ion-icon class="icon all" name="people-sharp"></ion-icon>
                 <div class="name-user-sidebar">
                     <p >Todos</p>
@@ -47,7 +56,7 @@
                     <ion-icon class="icon padlock" name="lock-closed-outline"></ion-icon>
                     <div class="name-user-sidebar">
                         <p >Todos</p>
-                        <ion-icon class="checkbox hidden bottom" name="checkmark-outline"></ion-icon>
+                        <ion-icon class="checkbox  bottom" name="checkmark-outline"></ion-icon>
                     </div>
                 </div>
                 <div class ='choice-visibilit' name="private_message" onclick="choiceVisibilit(this)">
@@ -63,7 +72,8 @@
 
     <footer class="footer">
         <div class="send-mesage-footer"> 
-            <input class="msg" type="text" placeholder="Escreva aqui...">
+            <input class="input-msg" type="text" value="" placeholder="Escreva aqui...">
+            <h1></h1>
         </div>
        
         <img src="images/Vector (8).png" alt="send-text" onclick="sendMessage()">
