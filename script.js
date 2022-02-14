@@ -3,7 +3,7 @@ let messageTo = 'Todos'
 let textMsg = ''
 let typemessage = 'message'
 let usersGlobais = []
-let listMsgs = []
+let listMsgs = ''
 let lastMsg = listMsgs[listMsgs.length - 1]
 let input = document.getElementById("inputText");
 
@@ -165,12 +165,19 @@ function showMessages() {
         method: 'get',
         url: url,
     }).then((response) => {
+        let itemInMsg =response.data
+        let length =itemInMsg.length - 1
         if (listMsgs == '') {
             listMsgs = response.data[99]
             renderMessages(response.data, 0)
-        
-        } else if (response.data[response.data.length - 1] != listMsgs) {
-            newMessages(response.data)
+        //response.data[response.data.length - 1] !== listMsgs
+        } else if (itemInMsg[length].from !== listMsgs.from || itemInMsg[length].to !== listMsgs.to || itemInMsg[length].type !== listMsgs.type || itemInMsg[length].text !== listMsgs.text || itemInMsg[length].time !== listMsgs.time) {
+            console.log(itemInMsg[length].from);
+            console.log(listMsgs.from);
+            console.log('');
+            newMessages(itemInMsg)
+        }else{
+            console.log(itemInMsg[length].from+'      '+listMsgs.from);
         }
     })
 
