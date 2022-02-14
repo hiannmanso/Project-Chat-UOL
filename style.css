@@ -278,6 +278,6 @@ b{
     border-radius: 9px;
     border: none;
 }
-.inputText:focus{
+.send-mesage-footer input:focus{
     outline: none;
 }

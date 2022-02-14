@@ -5,14 +5,6 @@ let typemessage = 'message'
 let usersGlobais = []
 let listMsgs = []
 let lastMsg = listMsgs[listMsgs.length - 1]
-// Toastify({
-//     text:`mensagem enviada para ${messageTo}!`,
-//     duration: 3000,
-//     style: {
-//         background: "linear-gradient(to right, #00b09b, #96c93d)",
-//       }
-// }).showToast() 
-
 let input = document.getElementById("inputText");
 
 input.addEventListener("keyup", function (event) {
@@ -32,8 +24,6 @@ function inputInfos() {
     }
 
 }
-
-//abre a sidebar
 function showSideBar() {
     const sidebar = document.querySelector('.sidebar')
     sidebar.classList.remove('hidden')
@@ -41,14 +31,12 @@ function showSideBar() {
     complementSidebar.classList.remove('hidden')
 
 }
-//fecha a sidebar
 function closeSideBar() {
     const sidebar = document.querySelector('.sidebar')
     sidebar.classList.add('hidden')
     const complementSidebar = document.querySelector('.complement-sidebar')
     complementSidebar.classList.add('hidden')
 }
-//escolhe o destinatário da mensagem
 function choicePerson(personChoiced) {
     let persons = document.querySelectorAll('.user-sidebar')
     let hiddenCheckboxs = document.querySelectorAll('.user-sidebar .top')
@@ -59,7 +47,6 @@ function choicePerson(personChoiced) {
     personChoiced.querySelector('.user-sidebar .top').classList.remove('hidden')
     inputInfos()
 }
-//escolhe se a msg é publica ou dm
 function choiceVisibilit(visibilitChoice) {
     let closeAllPadLocks = document.querySelectorAll('.choice-visibilit .icon')
     let hiddenAllCheckBox = document.querySelectorAll('.name-user-sidebar .bottom')
@@ -76,21 +63,19 @@ function choiceVisibilit(visibilitChoice) {
     typemessage = visibilitChoice.attributes.name.value
     inputInfos()
 }
-
-//loga o user
-
 function loginUser() {
     let inputValue = document.querySelector('.inputUser')
-    let loading = document.querySelector('.loading')
-    let hiddeButton = document.querySelector('.buttonEnter')
-    hiddeButton.classList.add('hidden')
-    inputValue.classList.add('hidden')
-    loading.classList.remove('hidden')
-
+    
     user = inputValue.value
-    sendUser(user)
+    if(user != ''){
+        let loading = document.querySelector('.loading')
+        let hiddeButton = document.querySelector('.buttonEnter')
+        hiddeButton.classList.add('hidden')
+        inputValue.classList.add('hidden')
+        loading.classList.remove('hidden')
+        sendUser(user)
+    }
 }
-//envia o usuário que você decidiu logar
 function sendUser() {
     let url = 'https://mock-api.driven.com.br/api/v4/uol/participants'
     let loginScreen = document.querySelector('.loginScreen')
@@ -109,12 +94,11 @@ function sendUser() {
                 background: "linear-gradient(to right, #00b09b, #96c93d)",
             }
         }).showToast()
-        console.log(user);
         getInfoUsers()
         setInterval(isStillLogged, 5000)
         setInterval(showMessages, 3000)
         showMessages()
-    }).catch((error) => {
+    }).catch(() => {
         let inputValue = document.querySelector('.inputUser')
         let loading = document.querySelector('.loading')
         inputValue.classList.remove('hidden')
@@ -127,11 +111,8 @@ function sendUser() {
                 background: 'red',
             }
         }).showToast()
-
-        console.log(error);
     })
 }
-//testa se o usuário aidna está logado
 function isStillLogged() {
     let url = 'https://mock-api.driven.com.br/api/v4/uol/status'
     axios({
@@ -143,11 +124,9 @@ function isStillLogged() {
     }).then()
         .catch((error) => {
             console.log(error);
-            console.log('something is wrong');
+
         })
 }
-
-//recebe as informações dos usuários
 function getInfoUsers() {
     let url = 'https://mock-api.driven.com.br/api/v4/uol/participants'
 
@@ -165,8 +144,6 @@ function getInfoUsers() {
         console.log(error);
     })
 }
-
-//coloca os users na sidebar
 function showUsersSideBar() {
     for (let index = 0; index < usersGlobais.length; index++) {
         let usersSideBar = document.querySelector('.users-sidebar')
@@ -181,8 +158,6 @@ function showUsersSideBar() {
 
     }
 }
-
-//render messages na tela
 function showMessages() {
     let url = 'https://mock-api.driven.com.br/api/v4/uol/messages'
     let containerMsgs = document.querySelector('.container-mesage')
@@ -193,7 +168,7 @@ function showMessages() {
         if (listMsgs == '') {
             listMsgs = response.data[99]
             renderMessages(response.data, 0)
-            console.log(listMsgs);
+        
         } else if (response.data[response.data.length - 1] != listMsgs) {
             newMessages(response.data)
         }
@@ -240,35 +215,35 @@ function showMessages() {
         containerMsgs.scrollIntoView({ block: 'end', behavior: 'smooth' })
     }
 }
-
-//envia mensagem para a API
 function sendMessage() {
 
     let url = 'https://mock-api.driven.com.br/api/v4/uol/messages'
     let msg = document.querySelector('.input-msg')
-    axios({
-        method: 'post',
-        url: url,
-        data: {
-            from: user,
-            to: messageTo,
-            text: msg.value,
-            type: typemessage,
-        }
-    }).then(response => {
-        Toastify({
-            text: `mensagem enviada para ${messageTo.toUpperCase()}!`,
-            duration: 3000,
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+    if(msg.value != ''){
+        axios({
+            method: 'post',
+            url: url,
+            data: {
+                from: user,
+                to: messageTo,
+                text: msg.value,
+                type: typemessage,
             }
-        }).showToast()
-        showMessages
-
-        msg.value = ''
-    }).catch(() => {
-        window.location.reload()
-    })
+        }).then(response => {
+            Toastify({
+                text: `mensagem enviada para ${messageTo.toUpperCase()}!`,
+                duration: 3000,
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast()
+            showMessages
+    
+            msg.value = ''
+        }).catch(() => {
+            window.location.reload()
+        })
+    }
 
 
 }
