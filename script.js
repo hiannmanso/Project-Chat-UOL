@@ -219,19 +219,19 @@ function showMessages() {
             let containerMessages = document.querySelector(".container-mesage")
             if (caminhoMsg.type == 'private_message' && (caminhoMsg.from == user || caminhoMsg.to == user)) {
                 containerMessages.innerHTML +=
-                    `<div class="mesage privatemsg">
+                    `<div class="mesage privatemsg" data-identifier="message">
                     <h1> <span class ='timer'> (${caminhoMsg.time})</span> <b>${caminhoMsg.from}</b> reservadamente para <b>${caminhoMsg.to} 
                     </b>: ${caminhoMsg.text}</h1>
                 </div>`
             } else if (caminhoMsg.type == 'status') {
                 containerMessages.innerHTML +=
-                    `<div class="mesage status">
+                    `<div class="mesage status" data-identifier="message">
                     <h1><span class ='timer'> (${caminhoMsg.time})</span> <b>${caminhoMsg.from}</b> para <b>${caminhoMsg.to} 
                     </b>: ${caminhoMsg.text}</h1>
                 </div>`
             } else if (caminhoMsg.type == "message") {
                 containerMessages.innerHTML +=
-                    `<div class="mesage msg">
+                    `<div class="mesage msg" data-identifier="message">
                 <h1><span class ='timer'> (${caminhoMsg.time})</span> <b>${caminhoMsg.from}</b> para <b>${caminhoMsg.to} 
                 </b>: ${caminhoMsg.text}</h1>
             </div>`
@@ -263,10 +263,11 @@ function sendMessage() {
                 background: "linear-gradient(to right, #00b09b, #96c93d)",
             }
         }).showToast()
+        showMessages
 
         msg.value = ''
-    }).catch(error => {
-        console.log(error);
+    }).catch(() => {
+        window.location.reload()
     })
 
 

@@ -278,3 +278,6 @@ b{
     border-radius: 9px;
     border: none;
 }
+.inputText:focus{
+    outline: none;
+}
