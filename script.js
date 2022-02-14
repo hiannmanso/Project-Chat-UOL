@@ -3,8 +3,8 @@ let messageTo = 'Todos'
 let textMsg = ''
 let typemessage = 'message'
 let usersGlobais = []
-let listMsgs= []
-let lastMsg = listMsgs[listMsgs.length -1]
+let listMsgs = []
+let lastMsg = listMsgs[listMsgs.length - 1]
 // Toastify({
 //     text:`mensagem enviada para ${messageTo}!`,
 //     duration: 3000,
@@ -13,15 +13,24 @@ let lastMsg = listMsgs[listMsgs.length -1]
 //       }
 // }).showToast() 
 
+let input = document.getElementById("inputText");
+
+input.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("inputSend").click();
+    }
+});
+
 inputInfos()
-function inputInfos(){
+function inputInfos() {
     let inputText = document.querySelector('.send-mesage-footer h1')
     if (typemessage != 'message') {
         inputText.innerHTML = `Enviando para ${messageTo} (reservadamente)`
-    }else{
+    } else {
         inputText.innerHTML = `Enviando para ${messageTo}`
     }
-    
+
 }
 
 //abre a sidebar
@@ -71,8 +80,14 @@ function choiceVisibilit(visibilitChoice) {
 //loga o user
 
 function loginUser() {
-    let inputValue = document.querySelector('.inputUser').value
-    user = inputValue
+    let inputValue = document.querySelector('.inputUser')
+    let loading = document.querySelector('.loading')
+    let hiddeButton = document.querySelector('.buttonEnter')
+    hiddeButton.classList.add('hidden')
+    inputValue.classList.add('hidden')
+    loading.classList.remove('hidden')
+
+    user = inputValue.value
     sendUser(user)
 }
 //envia o usuário que você decidiu logar
@@ -86,28 +101,33 @@ function sendUser() {
             name: user,
         }
     }).then(() => {
-        loginScreen.style.display ='none'
+        loginScreen.style.display = 'none'
         Toastify({
-            text:`Seja bem vindo ${user.toUpperCase()}!`,
+            text: `Seja bem vindo ${user.toUpperCase()}!`,
             duration: 3000,
             style: {
                 background: "linear-gradient(to right, #00b09b, #96c93d)",
-              }
-        }).showToast() 
+            }
+        }).showToast()
         console.log(user);
         getInfoUsers()
         setInterval(isStillLogged, 5000)
-        setInterval(showMessages,3000)
+        setInterval(showMessages, 3000)
         showMessages()
     }).catch((error) => {
+        let inputValue = document.querySelector('.inputUser')
+        let loading = document.querySelector('.loading')
+        inputValue.classList.remove('hidden')
+        loading.classList.add('hidden')
         Toastify({
-            text:`Já possui um usuário conectado com esse nome ${user},tente novamente com outro.`,
+
+            text: `Já possui um usuário conectado com esse nome ${user},tente novamente com outro.`,
             duration: 5000,
             style: {
                 background: 'red',
-              }
-        }).showToast() 
-        
+            }
+        }).showToast()
+
         console.log(error);
     })
 }
@@ -170,60 +190,60 @@ function showMessages() {
         method: 'get',
         url: url,
     }).then((response) => {
-        if (listMsgs == ''){
+        if (listMsgs == '') {
             listMsgs = response.data[99]
-            renderMessages(response.data,0)
+            renderMessages(response.data, 0)
             console.log(listMsgs);
-        }else if (response.data[response.data.length -1] != listMsgs){
+        } else if (response.data[response.data.length - 1] != listMsgs) {
             newMessages(response.data)
         }
     })
-    
-function newMessages(allMsgs) {
-    for (let index = 0; index < allMsgs.length; index++) {
-       let wayMsg = allMsgs[index]
-       if(wayMsg.from == listMsgs.from && wayMsg.to == listMsgs.to && wayMsg.text  == listMsgs.text && wayMsg.type == listMsgs.type && wayMsg.time === listMsgs.time){
-           let start = index ;
-           listMsgs = allMsgs[99]
-            renderMessages(allMsgs,start)
-           break;
-       }else{
 
-       }
-   }
-}
+    function newMessages(allMsgs) {
+        for (let index = 0; index < allMsgs.length; index++) {
+            let wayMsg = allMsgs[index]
+            if (wayMsg.from == listMsgs.from && wayMsg.to == listMsgs.to && wayMsg.text == listMsgs.text && wayMsg.type == listMsgs.type && wayMsg.time === listMsgs.time) {
+                let start = index;
+                listMsgs = allMsgs[99]
+                renderMessages(allMsgs, start)
+                break;
+            } else {
 
-function renderMessages(response,start) {
-    for (let index = start; index < response.length; index++) {
-        let caminhoMsg = response[index]
-        let containerMessages = document.querySelector(".container-mesage")
-        if (caminhoMsg.type == 'private_message' && (caminhoMsg.from == user || caminhoMsg.to == user)) {
-            containerMessages.innerHTML +=
-                `<div class="mesage privatemsg">
+            }
+        }
+    }
+
+    function renderMessages(response, start) {
+        for (let index = start; index < response.length; index++) {
+            let caminhoMsg = response[index]
+            let containerMessages = document.querySelector(".container-mesage")
+            if (caminhoMsg.type == 'private_message' && (caminhoMsg.from == user || caminhoMsg.to == user)) {
+                containerMessages.innerHTML +=
+                    `<div class="mesage privatemsg">
                     <h1> <span class ='timer'> (${caminhoMsg.time})</span> <b>${caminhoMsg.from}</b> reservadamente para <b>${caminhoMsg.to} 
                     </b>: ${caminhoMsg.text}</h1>
                 </div>`
-        } else if (caminhoMsg.type == 'status') {
-            containerMessages.innerHTML +=
-                `<div class="mesage status">
+            } else if (caminhoMsg.type == 'status') {
+                containerMessages.innerHTML +=
+                    `<div class="mesage status">
                     <h1><span class ='timer'> (${caminhoMsg.time})</span> <b>${caminhoMsg.from}</b> para <b>${caminhoMsg.to} 
                     </b>: ${caminhoMsg.text}</h1>
                 </div>`
-        } else if (caminhoMsg.type == "message") {
-            containerMessages.innerHTML +=
-                `<div class="mesage msg">
+            } else if (caminhoMsg.type == "message") {
+                containerMessages.innerHTML +=
+                    `<div class="mesage msg">
                 <h1><span class ='timer'> (${caminhoMsg.time})</span> <b>${caminhoMsg.from}</b> para <b>${caminhoMsg.to} 
                 </b>: ${caminhoMsg.text}</h1>
             </div>`
+            }
         }
+        containerMsgs.scrollIntoView({ block: 'end', behavior: 'smooth' })
     }
-    containerMsgs.scrollIntoView({ block: 'end', behavior:'smooth'})
-}
 }
 
 //envia mensagem para a API
 function sendMessage() {
-    
+
     let url = 'https://mock-api.driven.com.br/api/v4/uol/messages'
     let msg = document.querySelector('.input-msg')
     axios({
@@ -237,46 +257,17 @@ function sendMessage() {
         }
     }).then(response => {
         Toastify({
-            text:`mensagem enviada para ${messageTo.toUpperCase()}!`,
+            text: `mensagem enviada para ${messageTo.toUpperCase()}!`,
             duration: 3000,
             style: {
                 background: "linear-gradient(to right, #00b09b, #96c93d)",
             }
         }).showToast()
-        
+
         msg.value = ''
-    }).catch(error =>{
+    }).catch(error => {
         console.log(error);
     })
 
 
 }
-
-
-// function verifyNewMessage() {
-//     let messages = [...document.querySelectorAll('.mesage')]
-//     if (listMsgs == '') {
-//         messages.map((item)=>{ 
-//             listMsgs.push(item)
-//         })
-//     }else{
-//         filterMsgs(messages)
-//         console.log(messages);
-//     }
-// }
-
-// function filterMsgs(messages) {     
-//     for (let index = 0; index < messages.length; index++) {
-//         if (messages[index] == lastMsg) {
-//             addNewMsgs(index,messages)
-//             break
-//         }
-        
-//     }
-// }
-
-// function addNewMsgs(lastMsg, messages){
-//     for (let index = lastMsg; index < messages.length; index++) {
-//        console.log(messages[index]);
-//     }
-// }

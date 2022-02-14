@@ -18,8 +18,9 @@
 <body>
     <div class ='loginScreen'>
         <img class ='imgLogin'src="images/logo 1.png" alt='logoUOL'>
-        <input class="inputUser" type="text" placeholder="Digite seu nome">
+        <input  class="inputUser" type="text" placeholder="Digite seu nome">
         <button class="buttonEnter" onclick="loginUser()">Entrar</button>
+        <img class="loading hidden" src="images/loading.gif" alt="loading">
 
     </div>
     <header class="header">
@@ -72,11 +73,11 @@
 
     <footer class="footer">
         <div class="send-mesage-footer"> 
-            <input class="input-msg" type="text" value="" placeholder="Escreva aqui...">
+            <input id ='inputText' class="input-msg" type="text" value="" placeholder="Escreva aqui...">
             <h1></h1>
         </div>
        
-        <img src="images/Vector (8).png" alt="send-text" onclick="sendMessage()">
+        <img id="inputSend" src="images/Vector (8).png" alt="send-text" onclick="sendMessage()">
     </footer>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
